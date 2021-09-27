@@ -5,6 +5,9 @@ import os
 
 
 class spa:
+	def init():
+		os.system("cp ./spa /usr/bin/spa")
+
 	def spa(action, package):
 		if action == "install":
 			pkg = requests.get(f"https://spa.ssniper1.ml/{package}.tar.xz")
@@ -23,6 +26,10 @@ class spa:
 		elif action == "about":
 			desc = requests.get(f"https://spa.ssniper1.ml/desc/{package}.desc")
 			print(desc.content.decode())
+
+		elif action == "init":
+			init()
+
 
 def checkArgs():
 	if len(sys.argv) < 3:
