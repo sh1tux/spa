@@ -10,7 +10,7 @@ class spa:
 
 	def spa(action, package):
 		if action == "install":
-			if input(f"Are you sure you want to {action} package {package}? [y/n]").lower == "y":
+			if input(f"Are you sure you want to {action} package {package}? [y/n]").lower() == "y":
 				print("Downloading...")
 				pkg = requests.get(f"https://spa.ssniper1.ml/{package}.tar.xz")
 				print("Downloading done! Now writing...")
