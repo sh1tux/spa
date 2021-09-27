@@ -10,14 +10,17 @@ class spa:
 
 	def spa(action, package):
 		if action == "install":
-			pkg = requests.get(f"https://spa.ssniper1.ml/{package}.tar.xz")
-			#os.system(f"touch ./{package}.tar.xz")
-			pkgfile = open(f"./{package}.tar.xz", "wb")
-			pkgfile.write(pkg.content)
-			pkgfile.close()
-			print("Installing...")
-			os.system(f"tar xf {package}.tar.xz && mv {package} /usr/bin/{package}")
-			print(f"Done! You can launch newly installed program by entering {package}")
+			if input(f"Are you sure you want to {action} package {package}? [y/n]").lower == "y":
+				print("Downloading...")
+				pkg = requests.get(f"https://spa.ssniper1.ml/{package}.tar.xz")
+				print("Downloading done! Now writing...")
+				#os.system(f"touch ./{package}.tar.xz")
+				pkgfile = open(f"./{package}.tar.xz", "wb")
+				pkgfile.write(pkg.content)
+				pkgfile.close()
+				print("Installing...")
+				os.system(f"tar xf {package}.tar.xz && mv {package} /usr/bin/{package} && rm -rf {package}.tar.xz")
+				print(f"Done! You can launch newly installed program by entering {package}")
 
 		elif action == "remove" or action == "delete":
 			if input(f"Are you sure you want to delete package {package}? [y/N]").lower() == "y":
@@ -28,7 +31,7 @@ class spa:
 			print(desc.content.decode())
 
 		elif action == "init":
-			init()
+			spa.init()
 
 
 def checkArgs():
