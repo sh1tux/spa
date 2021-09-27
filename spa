@@ -9,7 +9,7 @@ class spa:
 		pkg = requests.get(f"http://spa.ssniper1.ml/{package}.tar.xz")
 		os.system(f"touch ./{package}.tar.xz")
 		pkgfile = open(f"./{package}.tar.xz", "w")
-		pkg.write(pkgfile)
+		pkgfile.write(pkg.content)
 		pkgfile.close()
 
 def checkArgs():
