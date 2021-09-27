@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+import requests
+import sys
+import os
+
+
+class spa:
+	def spa(action, package):
+		pkg = requests.get(f"http://spa.ssniper1.ml/{package}.tar.xz")
+		os.system(f"touch ./{package}.tar.xz")
+		pkgfile = open(f"./{package}.tar.xz", "w")
+		pkg.write(pkgfile)
+		pkgfile.close()
+
+def checkArgs():
+	if len(sys.argv) < 3:
+		print("You forgot to specify something!")
+	else:
+		spa.spa(sys.argv[1], sys.argv[2])
+
+if __name__ == "__main__":
+	checkArgs()
