@@ -8,7 +8,7 @@ class spa:
 	def spa(action, package):
 		pkg = requests.get(f"http://spa.ssniper1.ml/{package}.tar.xz")
 		os.system(f"touch ./{package}.tar.xz")
-		pkgfile = open(f"./{package}.tar.xz", "w")
+		pkgfile = open(f"./{package}.tar.xz", "wb")
 		pkgfile.write(pkg.content)
 		pkgfile.close()
 
