@@ -24,7 +24,10 @@ class spa:
 
 		elif action == "remove" or action == "delete":
 			if input(f"Are you sure you want to delete package {package}? [y/N]").lower() == "y":
-				os.system(f"rm /usr/bin/{package}")
+				if package == "spa":
+					if input("This is potentially unneeded because you want to delete spa package itself! Are you sure 100%? [y/N]").lower() == "y":
+						os.system(f"rm /usr/bin/{package}")
+					os.system(f"rm -rf /usr/bin/{package}")
 
 		elif action == "about":
 			desc = requests.get(f"https://spa.ssniper1.ml/desc/{package}.desc")
