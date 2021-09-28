@@ -6,17 +6,30 @@ import os
 
 class spa:
 	def spa(action, package):
-		pkg = requests.get(f"https://spa.ssniper1.ml/{package}.tar.xz")
-		os.system(f"touch ./{package}.tar.xz")
-		pkgfile = open(f"./{package}.tar.xz", "wb")
-		pkgfile.write(pkg.content)
-		pkgfile.close()
+		if action == "install":
+			pkg = requests.get(f"https://spa.ssniper1.ml/{package}.tar.xz")
+			#os.system(f"touch ./{package}.tar.xz")
+			pkgfile = open(f"./{package}.tar.xz", "wb")
+			pkgfile.write(pkg.content)
+			pkgfile.close()
+			print("Installing...")
+			os.system(f"tar xf {package}.tar.xz && mv {package} /usr/bin/{package}")
+			print(f"Done! You can launch newly installed program by entering {package}")
+
+		elif action == "remove" or action == "delete":
+			if input(f"Are you sure you want to delete package {package}? [y/N]").lower() == "y":
+				os.system(f"rm /usr/bin/{package}")
+
+		elif action == "about":
+			desc = requests.get(f"https://spa.ssniper1.ml/desc/{package}.desc")
+			print(desc.content.decode())
 
 def checkArgs():
 	if len(sys.argv) < 3:
 		print("You forgot to specify something!")
 	else:
 		spa.spa(sys.argv[1], sys.argv[2])
+
 
 if __name__ == "__main__":
 	checkArgs()
