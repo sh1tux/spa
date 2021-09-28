@@ -27,6 +27,7 @@ class spa:
 				if package == "spa":
 					if input("This is potentially unneeded because you want to delete spa package itself! Are you sure 100%? [y/N]").lower() == "y":
 						os.system(f"rm /usr/bin/{package}")
+						exit
 					os.system(f"rm -rf /usr/bin/{package}")
 
 		elif action == "about":
