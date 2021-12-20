@@ -1,5 +1,0 @@
-if [[ $USER != "root" ]]
-	do
-	sudo init(runfirst)
-	done
-cp spa /usr/bin/spa
